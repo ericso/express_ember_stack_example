@@ -1,0 +1,35 @@
+doctype 5
+html
+	head
+		title = "Ember.js • TodoMVC"
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+
+		// ember templates
+		//- include templates/navigation
+
+		// library scripts
+		script(src='/javascripts/libs/jquery.min.js')
+		script(src='/javascripts/libs/handlebars.js')
+		script(src='/javascripts/libs/ember.js')
+		script(src='/javascripts/libs/ember-data.js')
+		script(src='/javascripts/libs/localstorage_adapter.js')
+
+		// ember application
+		script(src='/javascripts/app.js')
+
+		// ember router
+		script(src='/javascripts/router.js')
+		
+		// ember models
+		script(src='/javascripts/models/todo.js')
+
+		// ember data sources
+		script(src='/javascripts/models/store.js')
+
+		// ember views
+		script(src='/javascripts/views/edit_todo_view.js')
+
+		// ember controllers
+		script(src='/javascripts/controllers/todos_controller.js')

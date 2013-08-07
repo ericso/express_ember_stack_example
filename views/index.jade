@@ -1,0 +1,45 @@
+extends layout
+
+block content
+	script(type='text/x-handlebars', data-template-name='todos')
+		section#todoapp
+			header#header
+				h1 todos
+				{{view Ember.TextField id="new-todo" placeholder="What needs to be done?" valueBinding="newTitle" action="createTodo"}}
+
+			section#main
+				{{outlet}}
+				
+				{{view Ember.Checkbox id="toggle-all" checkedBinding="allAreDone"}}
+
+			footer#footer
+				span#todo-count
+					<strong>{{remaining}}</strong> {{inflection}} left
+				ul#filters
+					li
+						{{#linkTo 'todos.index' activeClass="selected"}}All{{/linkTo}}
+					li
+						{{#linkTo 'todos.active' activeClass="selected"}}Active{{/linkTo}}
+					li
+						{{#linkTo 'todos.completed' activeClass="selected"}}Completed{{/linkTo}}
+
+				{{#if hasCompleted}}
+				<button id="clear-completed" {{action "clearCompleted"}}>Clear completed ({{completed}})</button>
+				{{/if}}
+
+		footer#info
+			p Double-click to edit a todos
+
+	script(type="text/x-handlebars", data-template-name="todos/index")
+		ul#todo-list
+			{{#each controller itemController="todo"}}
+			<li {{bindAttr class="isCompleted:completed isEditing:editing"}}>
+			{{#if isEditing}}
+			{{view Todos.EditTodoView valueBinding="title"}}
+			{{else}}
+			{{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
+			<label {{action "editTodo" on="doubleClick"}}>{{title}}</label>
+			<button {{action "removeTodo"}} class="destroy"></button>
+			{{/if}}
+			</li>
+			{{/each}}
